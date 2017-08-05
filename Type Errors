@@ -1,0 +1,46 @@
+So here are the 2cents: Type I , II and III errors testing are essentially variations due to data being unbalanced. (Defn Unbalanced: Not having equal number of observations in each of the strata). If the data is balanced Type I , II and III error testing gives exact same results.
+
+So what happens when the data is imbalanced?
+
+Consider a model that includes two factors A and B; there are therefore two main effects, and an interaction, AB. SS(A, B, AB) indicates full model SS(A, B) indicates the model with no interaction. SS(B, AB) indicates the model that does not account for effects from factor A, and so on.
+
+This notation now makes sense. Just keep it in mind.
+
+SS(AB | A, B) = SS(A, B, AB) - SS(A, B)
+
+SS(A | B, AB) = SS(A, B, AB) - SS(B, AB)
+
+SS(B | A, AB) = SS(A, B, AB) - SS(A, AB)
+
+SS(A | B)     = SS(A, B) - SS(B)
+
+SS(B | A)     = SS(A, B) - SS(A)
+Type I, also called "sequential" sum of squares:
+
+1) SS(A) for factor A.
+
+2) SS(B | A) for factor B.
+
+3) SS(AB | B, A) for interaction AB.
+
+So we estimate main effect of A first them, effect of B given A, and then estimate interaction AB given A and B (This is where being imbalanced data, the differences kick in. As we estimate main effect first and then main of other and then interaction in a "sequence")
+
+Type II:
+
+1) SS(A | B) for factor A.
+
+2) SS(B | A) for factor B.
+
+Type II tests significance of main effect of A after B and B after A. Why is there no SS(AB | B, A) ? Caveat is that type II method can be used only when we have already tested for interaction to be insignificant. Given that there is no interaction (SS(AB | B, A) is insignificant) type II test has better power over type III
+
+Type III:
+
+1) SS(A | B, AB) for factor A.
+
+2) SS(B | A, AB) for factor B.
+
+So we tested for interaction during type II and interaction was significant. Now we need to use type III as it takes into account the interaction term.
+
+As @caracal has said already, When data is balanced, the factors are orthogonal, and types I, II and III all give the same results. I hope this helps !
+
+Disclosure: Most of it is not my own work. I found this excellent page linked and felt like boiling it down further to make it simpler.
